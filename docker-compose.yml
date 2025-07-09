@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  vector-job:
+    build: .
+    environment:
+      - FALKORDB_HOST=${FALKORDB_HOST:-localhost}
+      - FALKORDB_PORT=${FALKORDB_PORT:-6379}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL:-text-embedding-3-small}
+      - BATCH_SIZE=${BATCH_SIZE:-50}
+      - SLEEP_INTERVAL=${SLEEP_INTERVAL:-300}
+    restart: unless-stopped
+    
+    # Uncomment if running with FalkorDB in same compose stack
+    # depends_on:
+    #   - falkordb
